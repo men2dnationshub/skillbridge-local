@@ -78,7 +78,6 @@ def render_placeholder(title: str, description: str, milestone: str) -> None:
 
 def render_footer(app_name: str) -> None:
     st.markdown(
-        f'<p class="footer">{html.escape(app_name)} · Calabar pilot · MVP Milestone 1</p>',
+        f'<p class="footer">{html.escape(app_name)} · Calabar pilot · MVP Milestone 3</p>',
         unsafe_allow_html=True,
     )
-

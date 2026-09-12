@@ -26,7 +26,7 @@ with st.sidebar:
     st.caption("Connecting talent with real business opportunities")
     st.divider()
     st.markdown("**MVP status**")
-    st.caption("Milestone 2 · Accounts and profiles")
+    st.caption("Milestone 3 · Verification and opportunities")
     st.markdown("**Pilot location**")
     st.caption(settings.app_location)
     st.divider()
@@ -49,9 +49,9 @@ left, middle, right = st.columns(3)
 with left:
     st.metric("Student profiles", "0", help="Enabled in Milestone 2")
 with middle:
-    st.metric("Verified businesses", "0", help="Enabled in Milestone 3")
+    st.metric("Verified businesses", "Live", help="Business verification is enabled")
 with right:
-    st.metric("Open opportunities", "0", help="Enabled in Milestone 3")
+    st.metric("Open opportunities", "Live", help="Opportunity publishing is enabled")
 
 st.markdown("### How it will work")
 step_one, step_two, step_three = st.columns(3)

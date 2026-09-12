@@ -85,6 +85,7 @@ def logout(settings: Settings) -> None:
     st.session_state.pop(SESSION_KEY, None)
     st.session_state.pop(TOKEN_KEY, None)
     st.session_state.pop("demo_profiles", None)
+    st.session_state.pop("demo_opportunities", None)
 
 
 def get_authenticated_client(settings: Settings):
@@ -185,16 +186,42 @@ def login(settings: Settings, email: str, password: str) -> AuthResult:
 
     user = _user_from_supabase(response.user)
     set_current_user(user, response.session)
+    try:
+        profile_result = (
+            get_authenticated_client(settings)
+            .table("profiles")
+            .select("role,full_name")
+            .eq("id", user.id)
+            .maybe_single()
+            .execute()
+        )
+        profile = profile_result.data or {}
+        stored_role = str(profile.get("role") or user.role)
+        if stored_role in {"student", "business", "admin"}:
+            user = AuthUser(
+                id=user.id,
+                email=user.email,
+                role=stored_role,
+                full_name=str(profile.get("full_name") or user.full_name),
+                mode="live",
+            )
+            set_current_user(user, response.session)
+    except Exception:
+        pass
     return AuthResult(True, "Welcome back.", user=user)
 
 
 def start_demo_session(role: str) -> AuthUser:
-    clean_role = _safe_role(role)
+    clean_role = role if role in {"student", "business", "admin"} else "student"
     user = AuthUser(
         id=f"demo-{clean_role}",
         email=f"demo.{clean_role}@skillbridge.local",
         role=clean_role,
-        full_name="Demo Student" if clean_role == "student" else "Demo Business Owner",
+        full_name={
+            "student": "Demo Student",
+            "business": "Demo Business Owner",
+            "admin": "Demo Administrator",
+        }[clean_role],
         mode="demo",
     )
     set_current_user(user)

@@ -2,7 +2,7 @@
 
 SkillBridge Local connects students and recent graduates with practical digital projects from verified small businesses.
 
-This package contains **MVP Milestone 2**, including the application foundation, accounts, and profiles.
+This package contains **MVP Milestone 3**, including the application foundation, accounts, profiles, business verification, and opportunity publishing.
 
 ## Milestone 1 includes
 
@@ -26,6 +26,17 @@ This package contains **MVP Milestone 2**, including the application foundation,
 - Offline demo accounts for interface testing
 - Supabase authentication migration and Row Level Security policies
 - Database protection against role changes and business self verification
+
+## Milestone 3 includes
+
+- Administrator business verification queue
+- Secure business approval and rejection
+- Opportunity drafts and review submission
+- Compensation, duration, skill, location, and deadline validation
+- Administrator opportunity approval and publication
+- Public opportunity catalogue with search and work arrangement filters
+- Row Level Security for businesses, administrators, students, and visitors
+- Offline demo experience and automated tests
 
 ## Run on Ubuntu
 
@@ -70,11 +81,17 @@ Open the Supabase SQL Editor and run:
 sql/001_milestone_2_auth_profiles.sql
 ```
 
+Then run the Milestone 3 migration:
+
+```text
+sql/002_milestone_3_opportunities.sql
+```
+
 Then enable email authentication in the Supabase Authentication settings. If email confirmation is enabled, new users must confirm their email before logging in.
 
 ## Current status
 
-Milestone 1 and Milestone 2 are implemented. The app can create live accounts after Supabase is connected, and it includes session only demo accounts for testing without credentials. Opportunity publishing belongs to Milestone 3.
+Milestones 1, 2, and 3 are implemented. The remaining deployment actions are listed in `docs/milestone_3_checklist.md`. Applications belong to Milestone 4.
 
 ## Brand colours
 

@@ -15,9 +15,11 @@ def test_required_milestone_one_files_exist():
         "modules/auth.py",
         "modules/permissions.py",
         "modules/profiles.py",
+        "modules/opportunities.py",
         "modules/ui.py",
         "pages/0_Account.py",
         "sql/001_milestone_2_auth_profiles.sql",
+        "sql/002_milestone_3_opportunities.sql",
     )
 
     for relative_path in expected:
